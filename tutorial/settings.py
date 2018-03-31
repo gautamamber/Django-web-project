@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'gautamamber5@gmail.com'
+EMAIL_HOST_PASSWORD = 'ambergautam1998'
+EMAIL_PORT = 587
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -50,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'tutorial.middleware.LoginRequiredMiddleware',
 ]
+
 
 ROOT_URLCONF = 'tutorial.urls'
 
@@ -114,6 +121,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+
 
 
 # Static files (CSS, JavaScript, Images)

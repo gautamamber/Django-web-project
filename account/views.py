@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 # just check the home page
@@ -24,11 +26,13 @@ def register(request):
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('/account')
+
+
+			return redirect('/account/login/')
 	else:
 		form = RegistrationForm
-		args = {'form' : form}
-		return render(request, 'account/reg_forms.html', args)
+	args = {'form' : form}
+	return render(request, 'account/reg_forms.html', args)
 
 #view profile
 @login_required
@@ -42,6 +46,13 @@ def edit_profile(request):
 		form = EditProfileForm(request.POST, instance = request.user)
 		if form.is_valid():
 			form.save()
+			"""
+			subject = "Thank you"
+			message = 'Your confirmation email'
+			from_email = settings.EMAIL_HOST_USER
+			to_list = [save_it.email]
+			send_mail(subject, message, from_email, to_list, fail_silently = False)
+			"""
 			return redirect('/account/profile')
 	else:
 		#blank form
